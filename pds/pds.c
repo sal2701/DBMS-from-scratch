@@ -19,7 +19,8 @@ int processline( char * line);
 
 int pds_create( char *repo_name );
 void get_link_file_info( char *link_name );
-
+void store_preorder( struct BST_Node * node );
+int is_linked( char * entity_name, int key);
 
 
 ////////////////////////////
@@ -431,10 +432,9 @@ int update_by_key( char *entity_name, int key, void *newrec )
         ndx_entry = ( struct PDS_NdxInfo * ) bst_node->data;
         offset = ndx_entry->offset;
         fseek( repo_handle.pds_data_fp, offset, SEEK_SET );
-        // read key as well as record
-        int *tmp;
-        fwrite( tmp, sizeof(int), 1, repo_handle.pds_data_fp);
-        writesize = fread( newrec, repo_handle.entity_size, 1, repo_handle.pds_data_fp);
+        // write key as well as record
+        fwrite( &key, sizeof(int), 1, repo_handle.pds_data_fp);
+        writesize = fwrite( newrec, repo_handle.entity_size, 1, repo_handle.pds_data_fp);
         status = PDS_SUCCESS;
     }
 
