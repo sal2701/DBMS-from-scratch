@@ -1,0 +1,4 @@
+academia
+entity student 95
+entity course 38
+relationship enrollment student course

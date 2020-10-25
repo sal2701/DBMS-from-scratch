@@ -21,6 +21,7 @@ int pds_create( char *repo_name );
 void get_link_file_info( char *link_name );
 void store_preorder( struct BST_Node * node );
 int is_linked( char * entity_name, int key);
+void display_linked_data( struct PDS_LinkedKeySet *linked_data );
 
 
 ////////////////////////////
@@ -616,6 +617,13 @@ int is_linked( char * entity_name, int key)
     return 0;
 }
 
+void display_linked_data( struct PDS_LinkedKeySet *linked_data )
+{
+    for( int i=0; i<linked_data->link_count; i++)
+    {
+        printf("%d  -  %d\n", linked_data->key, linked_data->linked_keys[i]);
+    }
+}
 
 ////////////////////////
 //CLOSING THE DATABASE//
